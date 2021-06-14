@@ -32,7 +32,7 @@ class ApiView(web.View):
         if not re.match(URL_REGEX, url):
             return web.Response(status=400, text="400: Bad Request, Invalid URL provided.")
     
-        key = data['key'] if data.get('key') else await generate_key(data)
+        key = str(data['key']) if data.get('key') else await generate_key(data)
         if not key.isalnum():
             return web.Response(status=400, text="400: Bad Request, Key should only contain alphanumeric characters.")
     
